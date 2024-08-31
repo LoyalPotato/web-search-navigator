@@ -15,6 +15,7 @@ YouTube, Startpage, Brave Search, Google Scholar, Github, Gitlab, and Amazon.
 
 - [Table of contents](#table-of-contents)
 - [Features](#features)
+- [My (LoyalPotato) Changes](#my-loyalpotato-changes)
 - [Installation](#installation)
   - [Chrome](#chrome)
     - [Installing from a release](#installing-from-a-release)
@@ -51,6 +52,20 @@ YouTube, Startpage, Brave Search, Google Scholar, Github, Gitlab, and Amazon.
   Scholar, Github, Gitlab, and Amazon (needs to be enabled in the options). Note
   that the extension does not have permissions for these optional websites
   unless you explicitly enable them.
+
+## My (LoyalPotato) Changes
+
+The original version of this extension wasn't working with StartPage.
+It hadn't been touched for 4 years and so, naturally, things changed and it no
+longer functions.
+
+This fork tries to make it work on it again, but I also didn't make much effort
+in getting everything to work. Here's what I know is working:
+
+- Search results navigation
+- Navigating to next/prev pages
+- Navigating to Search,Images,Videos,News. **It only has navigation in the Search
+page** as I haven't made efforts to fix the rest (because I don't use it)
 
 ## Installation
 
