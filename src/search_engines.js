@@ -877,7 +877,7 @@ class StartPage {
   }
   getTopMargin(element) {
     return getFixedSearchBoxTopMargin(
-        document.querySelector('div.layout-web__header'),
+        document.querySelector('div.Layout header'),
         element,
     );
   }
@@ -890,10 +890,10 @@ class StartPage {
   }
 
   static #isSearchTab() {
-    return document.querySelector('div.layout-web') != null;
+    return document.querySelector('div.Layout') != null;
   }
   static #isImagesTab() {
-    return document.querySelector('div.layout-images') != null;
+    return document.querySelector('div.LayoutImages') != null;
   }
 
   getSearchResults() {
@@ -904,28 +904,22 @@ class StartPage {
     }
     const containerSelector = (element) => {
       if (StartPage.#isSearchTab()) {
-        return element.closest('.w-gl__result');
+        return element.closest('.result');
       }
       return element;
     };
     const includedElements = [
       {
-        nodes: document.querySelectorAll('a.w-gl__result-url'),
+        nodes: document.querySelectorAll('a.result-link'),
         highlightedElementSelector: containerSelector,
         highlightClass: 'wsn-startpage-focused-link',
         containerSelector: containerSelector,
       },
       {
-        nodes: document.querySelectorAll('.pagination--desktop button'),
-        highlightClass: 'wsn-startpage-focused-link',
-      },
-      // As of 2020-06-20, this doesn't seem to match anything.
-      {
         nodes: document.querySelectorAll(
-            '.vo-sp.vo-sp--default > a.vo-sp__link',
+          'div.pagination>form[aria-label="page Prev"] button, div.pagination>form[aria-label="page Next"] button',
         ),
-        highlightedElementSelector: containerSelector,
-        highlightClass: 'wsn-startpage-focused-link',
+        highlightClass: 'wsn-google-card-item',
       },
     ];
     const excludedElements = document.querySelectorAll('button[disabled]');
@@ -933,37 +927,46 @@ class StartPage {
   }
 
   get previousPageButton() {
-    const menuLinks = document.querySelectorAll('.inline-nav-menu__link');
+    const menuLinks = document.querySelectorAll('.inline-nav .vertical-link-container');
     if (!menuLinks || menuLinks.length < 4) {
       return null;
     }
 
     return document.querySelector(
-        'form.pagination__form.next-prev-form--desktop:first-of-type',
+        'div.pagination>form[aria-label="page Prev"] button',
     );
   }
 
   get nextPageButton() {
-    const menuLinks = document.querySelectorAll('.inline-nav-menu__link');
+    const menuLinks = document.querySelectorAll('.inline-nav .vertical-link-container');
     if (!menuLinks || menuLinks.length < 4) {
       return null;
     }
 
     return document.querySelector(
-        'form.pagination__form.next-prev-form--desktop:last-of-type',
+        'div.pagination>form[aria-label="page Next"] button',
     );
   }
 
   get tabs() {
-    const menuLinks = document.querySelectorAll('.inline-nav-menu__link');
+    const menuLinks = document.querySelectorAll('.inline-nav .vertical-link-container');
     if (!menuLinks || menuLinks.length < 4) {
       return {};
     }
+
     return {
-      navigateSearchTab: menuLinks[0],
-      navigateImagesTab: menuLinks[1],
-      navigateVideosTab: menuLinks[2],
-      navigateNewsTab: menuLinks[3],
+      navigateSearchTab: document.querySelector(
+          '.inline-nav form[aria-label="web"] button',
+      ),
+      navigateImagesTab: document.querySelector(
+          '.inline-nav form[aria-label="images"] button',
+      ),
+      navigateVideosTab: document.querySelector(
+          '.inline-nav form[aria-label="video"] button',
+      ),
+      navigateNewsTab: document.querySelector(
+          '.inline-nav form[aria-label="news"] button',
+      ),
     };
   }
 
